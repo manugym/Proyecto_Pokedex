@@ -8,21 +8,22 @@ for (let i = 1; i <= 151; i++) {
 }
 }
 
-
 async function getPokemonData(id) {
   console.log(3)
   const obj = await getData(`https://pokeapi.co/api/v2/pokemon/${id}`);
   console.log(obj);
 
-  const div = document.createElement('div');
-  div.innerHTML = obj.name;
 
-  listaPokemon.appendChild(div);
-
-  listaPokemon.innerHTML += '<div>' + obj.name + '</div>';
-  listaPokemon.innerHTML += '<img src = '+obj.sprites.other['official-artwork'].front_default+'>'
+  
+  listaPokemon.innerHTML += `<div class="carta-pokemon">
+                            <h1>${obj.name}</h1>
+                            <h2>${id}</h2>
+                            <img src =${obj.sprites.other['official-artwork'].front_default}>
+                            
+                            </div>`
 
 }
+
 async function getData(url) {
   const response = await fetch (url);
   const json = await response.text();
