@@ -1,53 +1,57 @@
 const listaPokemon = document.getElementById('contenedor-pokemon');
+const pokemonTodos = [];
 
-obtenerPokemon();
+obtenerPokemons();
 
-async function obtenerPokemon() {
-for (let i = 1; i <= 151; i++) {
-  await getPokemonData(i);
+
+async function obtenerPokemons() {
+  for (let i = 1; i <= 151; i++) {
+    const pokemon = await getData(`https://pokeapi.co/api/v2/pokemon/${i}`);
+    pokemonTodos.push(pokemon);
+  }
+
+  draw(pokemonTodos);
 }
-}
 
-async function getPokemonData(id) {
-  console.log(3)
-  const obj = await getData(`https://pokeapi.co/api/v2/pokemon/${id}`);
-  console.log(obj);
+async function draw(pokemons) {
+  for (let pokemon of pokemons) {
+    let tipos = '';
+    if (pokemon.types.length == 2) {
+      tipos += pokemon.types[0].type.name +' '+pokemon.types[1].type.name;
+    } else {
+      tipos += pokemon.types[0].type.name;
+    }
 
-
-  
-  listaPokemon.innerHTML += `<div class="carta-pokemon">
-                            <h1>${obj.name}</h1>
-                            <h2>${id}</h2>
-                            <img src =${obj.sprites.other['official-artwork'].front_default}>
+    listaPokemon.innerHTML += `<div class="carta-pokemon">
+                            <h1>${pokemon.name}</h1>
+                            <h2>${pokemon.id}</h2>
+                            <img src =${pokemon.sprites.other['official-artwork'].front_default}>
                             
-                            </div>`
-
+                            
+                            <h2>${tipos}
+                            
+                            </h2>
+                            </div>`;
+  }
 }
+
 
 async function getData(url) {
-  const response = await fetch (url);
+  const response = await fetch(url);
   const json = await response.text();
   return JSON.parse(json);
 }
 
 /*
 
-  console.log()
-document.createElement(id)
-
-document.getElementById('imagen').src = obj.sprites.other['official-artwork'].front_default;
-document.getElementById('name').innerText = obj.name;
-document.getElementById9('ability').innerText = obj.abilities[0].ability.name;*
+document.getElementById9('ability').innerText = pokemon.abilities[0].ability.name;*
 }
 
 async function getEvolutionChain(id) {
-  const obj = await getPokemonData(`https://pokeapi.co/api/v2/pokemon-species/${id}`);
+  const pokemon = await getPokemonData(`https://pokeapi.co/api/v2/pokemon-species/${id}`);
   const EvolutionChainURL = ojb.evolution_chain.url;
   const EvolutionChain = await getData(EvolutionChainURL);
   console.log(EvolutionChain);
 }
-
-
-
 getPokemonData(3);
 getEvolutionChain(3);*/
