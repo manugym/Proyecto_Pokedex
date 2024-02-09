@@ -21,13 +21,17 @@ async function draw(pokemons) {
     } else {
       tipos += pokemon.types[0].type.name;
     }
-
+    
     listaPokemon.innerHTML += `<div class="carta-pokemon">
-                            <div class="pokemon-nombre">${pokemon.name}</div>
-                            <div class="pokemon-id">${pokemon.id}</div>
-                            <div class="pokemon-imagen"><img src =${pokemon.sprites.other['official-artwork'].front_default}></div>
-                            <div class="pokemon-tipos">${tipos}</div>
-                            </div>`;
+                                <div class="pokemon-imagen">
+                                  <img src =${pokemon.sprites.other['official-artwork'].front_default}>
+                                </div>
+                                <div class="bloque-pokemon">
+                                  <div class="pokemon-nombre">${pokemon.name}</div>
+                                  <div class="pokemon-id">${pokemon.id}</div>
+                                  <div class="pokemon-tipos">${tipos}</div>
+                                </div>
+                              </div>`;
   }
 }
 
