@@ -1,7 +1,18 @@
 const listaPokemon = document.getElementById('contenedor-pokemon');
 const pokemonTodos = [];
+const pokemonFiltrados = [];
 
 obtenerPokemons();
+
+
+let inputText =  document.getElementById("cuadro-texto");
+inputText.addEventListener("keyup", (event) => search());
+
+function search() {
+  let inputLowerCase = inputText.value.toLowerCase();
+  console.log(inputLowerCase);
+
+}
 
 
 async function obtenerPokemons() {
@@ -9,7 +20,6 @@ async function obtenerPokemons() {
     const pokemon = await getData(`https://pokeapi.co/api/v2/pokemon/${i}`);
     pokemonTodos.push(pokemon);
   }
-
   draw(pokemonTodos);
 }
 
@@ -21,7 +31,10 @@ async function draw(pokemons) {
     } else {
       tipos += pokemon.types[0].type.name;
     }
+<<<<<<< Updated upstream
     
+=======
+>>>>>>> Stashed changes
     listaPokemon.innerHTML += `<div class="carta-pokemon">
                                 <div class="pokemon-imagen">
                                   <img src =${pokemon.sprites.other['official-artwork'].front_default}>
@@ -35,18 +48,18 @@ async function draw(pokemons) {
   }
 }
 
-
 async function getData(url) {
   const response = await fetch(url);
   const json = await response.text();
   return JSON.parse(json);
 }
 
-/*
 
+
+
+/*
 document.getElementById9('ability').innerText = pokemon.abilities[0].ability.name;*
 }
-
 async function getEvolutionChain(id) {
   const pokemon = await getPokemonData(`https://pokeapi.co/api/v2/pokemon-species/${id}`);
   const EvolutionChainURL = ojb.evolution_chain.url;
