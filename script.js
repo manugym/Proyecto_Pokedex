@@ -4,14 +4,25 @@ const pokemonFiltrados = [];
 
 obtenerPokemons();
 
-
-let inputText =  document.getElementById("cuadro-texto");
+/*Evento keyup para recoger el texto introducido por teclado y función
+search para igualar el texto recogido por teclado a la lista de nuestro pokemons
+almacenados en el array pokemonTodos
+*/
+let inputText = document.getElementById("cuadro-texto");
 inputText.addEventListener("keyup", (event) => search());
 
-function search() {
+async function search() {
   let inputLowerCase = inputText.value.toLowerCase();
-  console.log(inputLowerCase);
-
+  listaPokemon.innerHTML = " ";
+  const pokemonFiltrados = [];
+  for (let i = 1; i <= 151; i++) {
+    const pokemon = await getData(`https://pokeapi.co/api/v2/pokemon/${i}`);
+    if (pokemon.name.includes(inputLowerCase)) {
+      console.log("es verdad")
+      pokemonFiltrados.push(pokemon);
+    }
+  }
+  draw(pokemonFiltrados);
 }
 
 
@@ -31,10 +42,7 @@ async function draw(pokemons) {
     } else {
       tipos += pokemon.types[0].type.name;
     }
-<<<<<<< Updated upstream
-    
-=======
->>>>>>> Stashed changes
+
     listaPokemon.innerHTML += `<div class="carta-pokemon">
                                 <div class="pokemon-imagen">
                                   <img src =${pokemon.sprites.other['official-artwork'].front_default}>
