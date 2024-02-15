@@ -1,0 +1,67 @@
+body {
+  margin: 0;
+  background-image: url(/imagenes/fondo-body.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+header {
+  background-color: rgb(58, 58, 58);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 20dvh;
+}
+
+.barra-superior {
+  padding: 2dvh 0 2dvh 0;
+  display: flex;
+  justify-content: center;
+  background-color: rgb(227, 148, 0);
+  width: 100%;
+  height: 8vh;
+}
+
+.logo-pokemon {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* EMPIEZO AQUÍ LOS ESTILOS DEL CSS
+* @author: Javier Rico Navarro
+*/
+
+#contenedor-pokemon {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.carta-pokemon {
+  background-color: rgba(214, 214, 214, 0.63);
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  width: 20dvw;
+  height: 40dvh;
+  margin-top: 2%;
+  margin-left: 2%;
+}
+
+.pokemon-imagen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carta-pokemon img {
+  width: 70%;
+  height: 70%;
+}
+
+.bloque-pokemon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
