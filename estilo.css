@@ -44,15 +44,13 @@ header {
 
 #contenedor-pokemon {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  padding-left: 10%;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  padding-left: 5%;
   margin-top: 2%;
 }
 
 .carta-pokemon {
   background-image: url(/imagenes/fondo-carta.jpg);
-  display: flex;
-  flex-direction: column;
   border: 5px solid rgb(0, 0, 0);
   width: 20dvw;
   height: 40dvh;
