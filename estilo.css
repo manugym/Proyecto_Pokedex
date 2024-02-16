@@ -1,8 +1,10 @@
 body {
   margin: 0;
   background-image: url(/imagenes/fondo-body.jpg);
-  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center 0;
   background-size: cover;
+  height: 100dvh;
 }
 
 header {
