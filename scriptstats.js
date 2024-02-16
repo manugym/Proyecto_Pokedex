@@ -61,16 +61,60 @@ async function draw(pokemon, species, description, puntosBase) { // NUEVO @JAVI
 
   detallesPokemon.appendChild(descripcionPokemon);
 
+  const valorMaximo = 255;
   let puntosBaseContainer = document.createElement('div');
   puntosBaseContainer.className = 'puntos-base';
   puntosBaseContainer.innerHTML = `
         <h3>Puntos Base</h3>
-        <div class="puntos-vida">Vida: ${pokemon.stats[0].base_stat}</div>
-        <div class="puntos-ataque">Ataque: ${pokemon.stats[1].base_stat}</div>
-        <div class="puntos-defensa">Defensa: ${pokemon.stats[2].base_stat}</div>
-        <div class="puntos-ataque-especial">Ataque Especial: ${pokemon.stats[3].base_stat}</div>
-        <div class="puntos-defensa-especial">Defensa Especial: ${pokemon.stats[4].base_stat}</div>
-        <div class="puntos-velocidad">Velocidad: ${pokemon.stats[5].base_stat}</div>
+        <div class="puntos-base-stats">
+
+          <div class="stats-name">Vida: </div>
+          <div class="out" style = "width:${valorMaximo}px">
+            <div class="in" style = "width:${pokemon.stats[0].base_stat / valorMaximo * 100}%">
+              <div class="puntos-vida">${pokemon.stats[0].base_stat}</div>
+            </div>
+          </div>
+  
+          <div class="stats-name">Ataque: </div>
+            <div class="out" style = "width:${valorMaximo}px">
+              <div class="in" style = "width:${pokemon.stats[1].base_stat / valorMaximo * 100}%">
+                <div class="puntos-ataque">${pokemon.stats[1].base_stat}</div>
+              </div>
+          </div>
+
+          <div class="stats-name">Defensa: </div>
+            <div class="out" style = "width:${valorMaximo}px">
+              <div class="in" style = "width:${pokemon.stats[2].base_stat / valorMaximo * 100}%">
+                <div class="puntos-defensa">${pokemon.stats[2].base_stat}</div>
+              </div>
+          </div>
+
+          <div class="stats-name">Ataque Especial: </div>
+            <div class="out" style = "width:${valorMaximo}px">
+              <div class="in" style = "width:${pokemon.stats[3].base_stat / valorMaximo * 100}%">
+                <div class="puntos-ataque-">${pokemon.stats[3].base_stat}</div>
+              </div>
+          </div>
+
+          <div class="stats-name">Defensa Especial: </div>
+            <div class="out" style = "width:${valorMaximo}px">
+              <div class="in" style = "width:${pokemon.stats[4].base_stat / valorMaximo * 100}%">
+                <div class="puntos-vida">${pokemon.stats[4].base_stat}</div>
+              </div>
+          </div>
+
+          <div class="stats-name">Velocidad: </div>
+            <div class="out" style = "width:${valorMaximo}px">
+              <div class="in" style = "width:${pokemon.stats[5].base_stat / valorMaximo * 100}%">
+                <div class="puntos-vida">${pokemon.stats[5].base_stat}</div>
+              </div>
+          </div>
+          
+        </div>
+      
+    
+        
+          
         `;
 
   detallesPokemon.appendChild(puntosBaseContainer);
