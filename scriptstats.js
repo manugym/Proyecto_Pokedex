@@ -56,10 +56,7 @@ async function draw(pokemon, species, description, puntosBase) { // NUEVO @JAVI
       <p class="parrafo-pokemon">${description}</p>
       <div class="contenedor-datos">
         <p><b>Altura</b>: ${pokemon.height}</p>
-        <p><b>Categoría</b>: ${categoria}</p>
         <p><b>Peso</b>: ${pokemon.weight}</p>
-        <p><b>Habilidad</b>: ${pokemon.abilities[0].ability.name}</p>
-        <p><b>Sexo</b>: ${species.gender_rate}</p>
       </div>`;
 
   detallesPokemon.appendChild(descripcionPokemon);
@@ -67,15 +64,14 @@ async function draw(pokemon, species, description, puntosBase) { // NUEVO @JAVI
   let puntosBaseContainer = document.createElement('div');
   puntosBaseContainer.className = 'puntos-base';
   puntosBaseContainer.innerHTML = `
-      <h3>Puntos Base</h3>
-      <div class="contenedor-puntos">
-        <p class="puntos-vida">Vida: ${pokemon.stats[0].base_stat}</p>
-        <p class="puntos-ataque">Ataque: ${pokemon.stats[1].base_stat}</p>
-        <p class="puntos-defensa">Defensa: ${pokemon.stats[2].base_stat}</p>
-        <p class="puntos-ataque-especial">Ataque Especial: ${pokemon.stats[3].base_stat}</p>
-        <p class="puntos-defensa-especial">Defensa Especial: ${pokemon.stats[4].base_stat}</p>
-        <p class="puntos-velocidad">Velocidad: ${pokemon.stats[5].base_stat}</p>
-      </div>`;
+        <h3>Puntos Base</h3>
+        <div class="puntos-vida">Vida: ${pokemon.stats[0].base_stat}</div>
+        <div class="puntos-ataque">Ataque: ${pokemon.stats[1].base_stat}</div>
+        <div class="puntos-defensa">Defensa: ${pokemon.stats[2].base_stat}</div>
+        <div class="puntos-ataque-especial">Ataque Especial: ${pokemon.stats[3].base_stat}</div>
+        <div class="puntos-defensa-especial">Defensa Especial: ${pokemon.stats[4].base_stat}</div>
+        <div class="puntos-velocidad">Velocidad: ${pokemon.stats[5].base_stat}</div>
+        `;
 
   detallesPokemon.appendChild(puntosBaseContainer);
 
