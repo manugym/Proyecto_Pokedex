@@ -24,7 +24,7 @@ header {
   height: 8vh;
 }
 
-.logo-pokemon {
+.logo-pokemon, a, img{
   display: flex;
   justify-content: center;
   width: 100%;
@@ -48,7 +48,6 @@ header {
   width: 20dvw;
   height: 38dvh;
   margin-top: 2%;
-  margin-left: 2%;
 }
 
 .pokemon-imagen {
@@ -91,6 +90,7 @@ header {
 }
 
 .puntos-base {
+  font-size: 1.5em;
   margin-top: 2%;
   margin-left: 2%;
   border-radius: 20px;
@@ -101,20 +101,26 @@ header {
 }
 
 .puntos-base-stats {
+  font-weight: bold;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px 0px;
 }
 
+.stats-name {
+  text-align: center;
+  color: black;
+}
+
 .out {
   margin-right: 1dvw;
-  height: 2dvh;
-  background-color: red;
+  height: 2.7dvh;
+  background-color: rgb(255, 255, 255);
 }
 
 .in {
   height: 100%;
-  background-color: rgb(0, 255, 213);
+  background-color: rgb(255, 0, 0);
 }
 
 

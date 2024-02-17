@@ -8,19 +8,19 @@ async function obtenerPokemons() {
   if (id) {
     const pokemon = await getData(`https://pokeapi.co/api/v2/pokemon/${id}`);
 
-    const species = await getData(pokemon.species.url); // NUEVO @JAVI
-    const puntosBase = await getData(`https://pokeapi.co/api/v2/pokemon-species/${id}`); // NUEVO @JAVI
+    const species = await getData(pokemon.species.url);
+    const puntosBase = await getData(`https://pokeapi.co/api/v2/pokemon-species/${id}`);
 
     // Filtrar para obtener la descripción en español
-    let textoEspañol = species.flavor_text_entries.filter(entry => entry.language.name === 'es'); // NUEVO @JAVI
+    let textoEspañol = species.flavor_text_entries.filter(entry => entry.language.name === 'es');
 
     // Devolver la descripción
-    let description; // NUEVO @JAVI
-    if (textoEspañol.length > 0) { // NUEVO @JAVI 
-      description = textoEspañol[0].flavor_text; // NUEVO @JAVI
-    } else { // NUEVO @JAVI
-      description = 'No se encontró descripción en español para este Pokémon.'; // NUEVO @JAVI
-    } // NUEVO @JAVI
+    let description;
+    if (textoEspañol.length > 0) {
+      description = textoEspañol[0].flavor_text;
+    } else { 
+      description = 'No se encontró descripción en español para este Pokémon.';
+    } 
 
     draw(pokemon, species, description, puntosBase);
   } else {
@@ -31,7 +31,7 @@ async function obtenerPokemons() {
 obtenerPokemons();
 
 
-async function draw(pokemon, species, description, puntosBase) { // NUEVO @JAVI
+async function draw(pokemon, species, description, puntosBase) {
 
   // Crear una nueva carta de Pokémon
   let nuevaCarta = document.createElement('div');
@@ -41,18 +41,15 @@ async function draw(pokemon, species, description, puntosBase) { // NUEVO @JAVI
         <img src="${pokemon.sprites.other['official-artwork'].front_default}">
       </div>`;
 
-  // Agregar la carta de Pokémon al contenedor
   detallesPokemon.appendChild(nuevaCarta);
 
-  // A PARTIR DE AQUÍ ES TODO LO QUE HE HECHO @Javi
-
-  let categoria = species.genera && species.genera.filter(g => g.language.name === 'es')[0] ? species.genera.filter(g => g.language.name === 'es')[0].genus : 'No disponible';
+  
 
   let descripcionPokemon = document.createElement('div');
   descripcionPokemon.className = 'descripcion-pokemon';
   descripcionPokemon.innerHTML = `
-      <h1 class="nombre-pokemon">${pokemon.name}</h1>
-      <h3 class="numero-pokemon">Nº: ${pokemon.id}</h3>
+      <h1 class="nombre-pokemon">${pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</h1>
+      <h3 class="numero-pokemon">Nº: ${pokemon.id.toString().padStart(3, 0)}</h3>
       <p class="parrafo-pokemon">${description}</p>
       <div class="contenedor-datos">
         <p><b>Altura</b>: ${pokemon.height}</p>

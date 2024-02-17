@@ -50,9 +50,9 @@ async function draw(pokemons) {
         <img src="${pokemon.sprites.other['official-artwork'].front_default}">
       </div>
       <div class="bloque-pokemon">
-        <div class="pokemon-nombre">${pokemon.name}</div>
-        <div class="pokemon-id">${pokemon.id}</div>
-        <div class="pokemon-tipos">${tipos}</div>
+        <div class="pokemon-nombre">${pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</div>
+        <div class="pokemon-id">Nº: ${pokemon.id.toString().padStart(3, 0)}</div>
+        <div class="pokemon-tipos">${tipos.charAt(0).toUpperCase() + tipos.slice(1)}</div>
       </div>`;
 
     // Agregar el evento de clic al div "carta-pokemon"
@@ -60,7 +60,6 @@ async function draw(pokemons) {
       window.location.href = `statsPokemon.html?id=${pokemon.id}`;
     });
 
-    // Agregar la carta de Pokémon al contenedor
     listaPokemon.appendChild(nuevaCarta);
   }
 }
