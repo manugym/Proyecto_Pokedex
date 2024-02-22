@@ -2,6 +2,28 @@ const listaPokemon = document.getElementById('contenedor-pokemon');
 const pokemonTodos = [];
 const pokemonFiltrados = [];
 
+const diccionario = {
+  bug: "bicho",
+  steel: "acero",
+  water: "agua",
+  dragon: "dragón",
+  electric: "eléctrico",
+  ghost: "fantasma",
+  fire: "fuego",
+  fairy: "hada",
+  ice: "hielo",
+  fighting: "lucha",
+  normal: "normal",
+  grass: "planta",
+  psychic: "psíquico",
+  rock: "roca",
+  dark: "siniestro",
+  ground: "tierra",
+  poison: "veneno",
+  flying: "volador"
+}
+
+
 obtenerPokemons();
 
 /* Evento keyup para recoger el texto introducido por teclado y función
@@ -11,14 +33,13 @@ almacenados en el array pokemonTodos
 let inputText = document.getElementById("cuadro-texto");
 inputText.addEventListener("keyup", (event) => search());
 
-async function search() {
+function search() {
   let inputLowerCase = inputText.value.toLowerCase();
   listaPokemon.innerHTML = " ";
   const pokemonFiltrados = [];
-  for (let i = 1; i <= 151; i++) {
-    const pokemon = await getData(`https://pokeapi.co/api/v2/pokemon/${i}`);
+  for (let i = 0; i < 151; i++) {
+    const pokemon = pokemonTodos[i];
     if (pokemon.name.includes(inputLowerCase)) {
-      console.log("es verdad")
       pokemonFiltrados.push(pokemon);
     }
   }
@@ -35,11 +56,20 @@ async function obtenerPokemons() {
 
 async function draw(pokemons) {
   for (let pokemon of pokemons) {
-    let tipos = '';
+    let tipos = [];
     if (pokemon.types.length == 2) {
-      tipos += pokemon.types[0].type.name + ' ' + pokemon.types[1].type.name;
+      let tipo = pokemon.types[0].type.name;
+      let traduccion = diccionario[tipo]
+      tipos.push(traduccion);
+
+      tipo = pokemon.types[1].type.name;
+      traduccion = diccionario[tipo]
+      tipos.push(traduccion);
+
     } else {
-      tipos += pokemon.types[0].type.name;
+      tipo = pokemon.types[0].type.name;
+      const traduccion = diccionario[tipo];
+      tipos.push(traduccion);
     }
 
     // Crear una nueva carta de Pokémon
@@ -50,10 +80,18 @@ async function draw(pokemons) {
         <img src="${pokemon.sprites.other['official-artwork'].front_default}">
       </div>
       <div class="bloque-pokemon">
-        <div class="pokemon-nombre">${pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</div>
-        <div class="pokemon-id">Nº: ${pokemon.id.toString().padStart(3, 0)}</div>
-        <div class="pokemon-tipos">${tipos.charAt(0).toUpperCase() + tipos.slice(1)}</div>
-      </div>`;
+        <div class="pokemon-nombre">${pokemon.name}</div>
+        <div class="pokemon-id">Nº: ${pokemon.id.toString().padStart(3, 0)}</div>`
+
+    nuevaCarta.innerHTML +=
+      `<div class="pokemon-tipos">${tipos[0]}</div>`;
+
+    if (pokemon.types.length == 2) {
+      nuevaCarta.innerHTML +=
+        `<div class="pokemon-tipos">${tipos[1]}</div>`;
+    }
+
+    nuevaCarta.innerHTML += "</div>"
 
     // Agregar el evento de clic al div "carta-pokemon"
     nuevaCarta.addEventListener('click', () => {
@@ -84,4 +122,4 @@ async function getEvolutionChain(id) {
   console.log(EvolutionChain);
 }
 getPokemonData(3);
-getEvolutionChain(3);*/
+getEvolutionChain(3); */

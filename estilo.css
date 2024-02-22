@@ -63,6 +63,14 @@ header {
   align-items: center;
 }
 
+.pokemon-nombre {
+  text-transform: capitalize;
+}
+
+.pokemon-tipos {
+  text-transform: capitalize;
+}
+
 .carta-pokemon img {
   width: 70%;
   height: 70%;

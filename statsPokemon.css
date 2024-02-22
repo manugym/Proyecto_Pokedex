@@ -24,7 +24,9 @@ header {
   height: 8vh;
 }
 
-.logo-pokemon, a, img{
+.logo-pokemon,
+a,
+img {
   display: flex;
   justify-content: center;
   width: 100%;
@@ -39,7 +41,17 @@ header {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  
+
+}
+
+#contenedor-datos {
+  background-color: skyblue;
+  display: grid;
+  width: auto;
+  grid-template-columns: 1fr 1fr;
+  border-radius: 20px;
+  width: 60%;
+  margin: auto;
 }
 
 .carta-pokemon {
@@ -74,29 +86,21 @@ header {
   background-color: rgba(214, 214, 214, 0.63);
 }
 
-.descripcion-pokemon h1, h3, p {
+.descripcion-pokemon h1,
+h3,
+p {
   text-align: center;
   color: black;
 }
 
-.contenedor-datos {
-  background-color: skyblue;
-  display: grid;
-  width: auto;
-  grid-template-columns: 1fr 1fr;
-  border-radius: 20px;
-  width: 60%;
-  margin: auto;
-}
-
 .puntos-base {
-  font-size: 1.5em;
+  font-size: 1em;
   margin-top: 2%;
   margin-left: 2%;
   border-radius: 20px;
   height: 45dvh;
   width: 30dvw;
-  
+
   background-color: rgba(214, 214, 214, 0.63);
 }
 
@@ -122,5 +126,3 @@ header {
   height: 100%;
   background-color: rgb(255, 0, 0);
 }
-
-
