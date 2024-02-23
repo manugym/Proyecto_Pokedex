@@ -23,6 +23,27 @@ const diccionario = {
   flying: "volador"
 }
 
+const coloresTipos = {
+  bug: "#92A21E",
+  steel: "#60A3BA",
+  water: "#2481F0",
+  dragon: "#4E60E2",
+  electric: "#F9C02B",
+  ghost: "#703F71",
+  fire: "#E72324",
+  fairy: "#EF70EF",
+  ice: "#3DD9FD",
+  fighting: "#FF8121",
+  normal: "#A1A2A0",
+  grass: "#3DA224",
+  psychic: "#EF3F79",
+  rock: "#B0AA82",
+  dark: "#4F3F3C",
+  ground: "#92501B",
+  poison: "#8E41CB",
+  flying: "#82BAF0"
+}
+
 
 obtenerPokemons();
 
@@ -55,10 +76,16 @@ async function obtenerPokemons() {
 }
 
 async function draw(pokemons) {
+
   for (let pokemon of pokemons) {
     let tipos = [];
+    let tipo;
+    let tipoColor = coloresTipos[pokemon.types[0].type.name];
+    let tipoColor2;
+
     if (pokemon.types.length == 2) {
-      let tipo = pokemon.types[0].type.name;
+      tipoColor2 = coloresTipos[pokemon.types[1].type.name];
+      tipo = pokemon.types[0].type.name;
       let traduccion = diccionario[tipo]
       tipos.push(traduccion);
 
@@ -73,9 +100,13 @@ async function draw(pokemons) {
     }
 
     // Crear una nueva carta de Pokémon
-    let nuevaCarta = document.createElement('div');
+
+    let nuevaCarta = document.createElement('a');
+    nuevaCarta.href = `statsPokemon.html?id=${pokemon.id}`
+
     nuevaCarta.className = 'carta-pokemon';
-    nuevaCarta.innerHTML = `
+
+    let contenido = `
       <div class="pokemon-imagen">
         <img src="${pokemon.sprites.other['official-artwork'].front_default}">
       </div>
@@ -83,21 +114,18 @@ async function draw(pokemons) {
         <div class="pokemon-nombre">${pokemon.name}</div>
         <div class="pokemon-id">Nº: ${pokemon.id.toString().padStart(3, 0)}</div>`
 
-    nuevaCarta.innerHTML +=
-      `<div class="pokemon-tipos">${tipos[0]}</div>`;
+    contenido += `<div class="contenedor-tipos">
+
+      <div class="pokemon-tipos1" style="border-color: ${tipoColor}; color: ${tipoColor}">${tipos[0]}</div>`;
 
     if (pokemon.types.length == 2) {
-      nuevaCarta.innerHTML +=
-        `<div class="pokemon-tipos">${tipos[1]}</div>`;
+      contenido +=
+        `<div class="pokemon-tipos2" style="border-color: ${tipoColor2}; color: ${tipoColor2}">${tipos[1]}</div>`;
     }
 
-    nuevaCarta.innerHTML += "</div>"
+    contenido += "</div>"
 
-    // Agregar el evento de clic al div "carta-pokemon"
-    nuevaCarta.addEventListener('click', () => {
-      window.location.href = `statsPokemon.html?id=${pokemon.id}`;
-    });
-
+    nuevaCarta.innerHTML = contenido
     listaPokemon.appendChild(nuevaCarta);
   }
 }

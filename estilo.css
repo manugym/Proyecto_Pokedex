@@ -50,11 +50,14 @@ header {
 }
 
 .carta-pokemon {
-  background-image: url(/imagenes/fondo-carta.jpg);
+  /* background-image: url(/imagenes/fondo-carta.jpg); */
+  background-color: white;
   border: 5px solid rgb(0, 0, 0);
   width: 20dvw;
   height: 40dvh;
   margin-top: 20%;
+  text-decoration: none;
+  color: black;
 }
 
 .pokemon-imagen {
@@ -67,8 +70,23 @@ header {
   text-transform: capitalize;
 }
 
-.pokemon-tipos {
+.contenedor-tipos {
+  display: flex;
+  flex-direction: row;
+  margin-top: 1em;
+  gap: 1em;
+}
+
+.pokemon-tipos1 {
   text-transform: capitalize;
+  font-size: 1.2em;
+  border: 0.2rem solid;
+}
+
+.pokemon-tipos2 {
+  text-transform: capitalize;
+  font-size: 1.2em;
+  border: 0.2rem solid;
 }
 
 .carta-pokemon img {
