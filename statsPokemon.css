@@ -65,28 +65,30 @@ img {
 */
 
 #contenedor-pokemon {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 0,5dvw;
+  padding: 1%;
+  max-width: 100dvw;
+  justify-items: center;
+  gap: 20px;
 }
 
 #contenedor-datos {
-  background-color: skyblue;
   display: grid;
   width: auto;
   grid-template-columns: 1fr 1fr;
   border-radius: 20px;
-  width: 60%;
-  margin: auto;
+  width: 40dvw;
 }
 
 .carta-pokemon {
-  background-color: rgba(214, 214, 214, 0.63);
+  width: 40dvw;
+  height: auto;
+  padding: 1%;
   border-radius: 20px;
-  width: 20dvw;
-  height: 38dvh;
-  margin-top: 2%;
+  background-color: rgba(214, 214, 214, 0.803);
 }
 
 .pokemon-imagen {
@@ -101,16 +103,28 @@ img {
 }
 
 .descripcion-pokemon {
-  padding: 1%;
-  margin-top: 2%;
-  margin-left: 2%;
-  border-radius: 20px;
+  width: 40dvw;
   height: auto;
-  width: auto;
+  padding: 1%;
+  border-radius: 20px;
+  background-color: rgba(214, 214, 214, 0.803);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: rgba(214, 214, 214, 0.63);
+}
+
+.contenedor-tipos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pokemon-tipos2 {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+
 }
 
 .descripcion-pokemon h1,
@@ -121,14 +135,12 @@ p {
 }
 
 .puntos-base {
-  font-size: 1em;
-  margin-top: 2%;
-  margin-left: 2%;
+  width: 40dvw;
+  height: auto;
+  padding: 1%;
   border-radius: 20px;
-  height: 45dvh;
-  width: 30dvw;
-
-  background-color: rgba(214, 214, 214, 0.63);
+  background-color: rgba(214, 214, 214, 0.803);
+  font-size: 1em;
 }
 
 .puntos-base-stats {
@@ -155,14 +167,14 @@ p {
 }
 
 .cadena-evolutiva {
-  background-color: white;
+  width: 40dvw;
+  height: auto;
+  padding: 1%;
+  border-radius: 20px;
+  background-color: rgba(214, 214, 214, 0.803);
   display: flex;
   flex-direction: column;
   text-align: center;
-  width: 40dvw;
-  height: 40dvh;
-  margin-top: 5dvh;
-  margin-bottom: 5dvh;
 }
 
 .contenedor-evoluciones {
