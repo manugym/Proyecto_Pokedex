@@ -1,4 +1,25 @@
+/*
+@Author: Javier Rico Navarro
+@Author: Manuel José Muñoz Marín
+ */
 const detallesPokemon = document.getElementById('contenedor-pokemon');
+
+const modoNocturnoBoton = document.getElementById('modo-nocturno');
+const cuerpo = document.body;
+
+if (localStorage.getItem('modoNocturno') === 'true') {
+  cuerpo.classList.add('dark-mode');
+}
+// acción botón de modo nocturno
+modoNocturnoBoton.addEventListener('click', () => {
+  cuerpo.classList.toggle('dark-mode');
+
+  if (cuerpo.classList.contains('dark-mode')) {
+    localStorage.setItem('modoNocturno', 'true');
+  } else {
+    localStorage.setItem('modoNocturno', 'false');
+  }
+});
 
 const diccionario = {
   bug: "bicho",
@@ -124,7 +145,7 @@ async function draw(pokemon, species, description, puntosBase, evolutionChain, o
   descripcionPokemon.innerHTML += "</div>"
 
   descripcionPokemon.innerHTML += `
-    <p class="parrafo-pokemon" > ${ description }</p>
+    <p class="parrafo-pokemon" > ${description}</p>
       <div class="contenedor-datos">
         <p><b>Altura</b>: ${pokemon.height}</p>
         <p><b>Peso</b>: ${pokemon.weight}</p>
@@ -233,12 +254,12 @@ async function obtenerCadenaEvolutiva(chain) {
       if (evolucion.evolution_details.length > 0) {
         nivelEvolucion = evolucion.evolution_details[0].min_level;
       }
-      evoluciones.push({ nombre: nombrePokemon, nivel: nivelEvolucion, url: imageUrl, urlDetalles: `statsPokemon.html ? id = ${ idPokemon } ` });
+      evoluciones.push({ nombre: nombrePokemon, nivel: nivelEvolucion, url: imageUrl, urlDetalles: `statsPokemon.html ? id = ${idPokemon} ` });
     }
 
     // Si el Pokémon no tiene evoluciones, también lo agregamos a la lista
     if (estadoActual.evolves_to.length === 0) {
-      evoluciones.push({ nombre: nombrePokemon, nivel: null, url: imageUrl, urlDetalles: `statsPokemon.html ? id = ${ idPokemon } ` });
+      evoluciones.push({ nombre: nombrePokemon, nivel: null, url: imageUrl, urlDetalles: `statsPokemon.html ? id = ${idPokemon} ` });
     }
 
     if (estadoActual.evolves_to.length > 0) {
@@ -251,12 +272,6 @@ async function obtenerCadenaEvolutiva(chain) {
   return evoluciones;
 }
 
-// let tipos = '';
-//   if (pokemon.types.length == 2) {
-//     tipos += pokemon.types[0].type.name + ' ' + pokemon.types[1].type.name;
-//   } else {
-//     tipos += pokemon.types[0].type.name;
-//   }
 
 async function getData(url) {
   const response = await fetch(url);

@@ -1,3 +1,7 @@
+/*
+@Author: Javier Rico Navarro
+@Author: Manuel José Muñoz Marín
+ */
 const listaPokemon = document.getElementById('contenedor-pokemon');
 const pokemonTodos = [];
 const pokemonFiltrados = [];
@@ -5,10 +9,21 @@ const pokemonFiltrados = [];
 const modoNocturnoBoton = document.getElementById('modo-nocturno');
 const cuerpo = document.body;
 
+if (localStorage.getItem('modoNocturno') === 'true') {
+  cuerpo.classList.add('dark-mode');
+}
 // acción botón de modo nocturno
 modoNocturnoBoton.addEventListener('click', () => {
   cuerpo.classList.toggle('dark-mode');
+
+  if (cuerpo.classList.contains('dark-mode')) {
+    localStorage.setItem('modoNocturno', 'true');
+  } else {
+    localStorage.setItem('modoNocturno', 'false');
+  }
 });
+
+
 
 const diccionario = {
   bug: "bicho",
@@ -144,16 +159,3 @@ async function getData(url) {
   return JSON.parse(json);
 }
 
-
-
-/*
-document.getElementById9('ability').innerText = pokemon.abilities[0].ability.name;*
-}
-async function getEvolutionChain(id) {
-  const pokemon = await getPokemonData(`https://pokeapi.co/api/v2/pokemon-species/${id}`);
-  const EvolutionChainURL = ojb.evolution_chain.url;
-  const EvolutionChain = await getData(EvolutionChainURL);
-  console.log(EvolutionChain);
-}
-getPokemonData(3);
-getEvolutionChain(3); */

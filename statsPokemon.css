@@ -1,3 +1,8 @@
+/*
+@Author: Javier Rico Navarro
+@Author: Manuel José Muñoz Marín
+ */
+
 body {
   margin: 0;
   background-image: url(/imagenes/fondo-body.jpg);
@@ -7,12 +12,34 @@ body {
   height: 100dvh;
 }
 
+.dark-mode {
+  background-color: #333;
+  color: #fff;
+  background-image: none;
+}
+
+.dark-mode #contenedor-pokemon * {
+  background-color: #444;
+  color: #fff;
+}
+
+
+
+.dark-mode .carta-pokemon {
+  padding: 0;
+}
+
 header {
   background-color: rgb(58, 58, 58);
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 20dvh;
+}
+
+#modo-nocturno img {
+  height: 30px;
+  width: auto;
 }
 
 .barra-superior {
