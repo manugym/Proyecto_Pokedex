@@ -270,7 +270,7 @@ async function obtenerCadenaEvolutiva(chain) {
 
     // Si el Pokémon no tiene evoluciones, también lo agregamos a la lista
     if (estadoActual.evolves_to.length === 0) {
-      evoluciones.push({ nombre: nombrePokemon, nivel: null, url: imageUrl, urlDetalles: `statsPokemon.html?id=${idPokemon}` });
+      evoluciones.push({ nombre: nombrePokemon, nivel: "No evoluciona", url: imageUrl, urlDetalles: `statsPokemon.html?id=${idPokemon}` });
     }
 
     if (estadoActual.evolves_to.length > 0) {

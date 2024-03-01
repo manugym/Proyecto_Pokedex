@@ -19,10 +19,12 @@ body {
 }
 
 .dark-mode #contenedor-pokemon * {
-  background-color: #444;
   color: #fff;
 }
 
+.dark-mode .descripcion-pokemon * {
+  color: #fff;
+}
 
 
 .dark-mode .carta-pokemon {
@@ -90,6 +92,12 @@ img {
   grid-template-columns: 1fr 1fr;
   border-radius: 20px;
   width: 40dvw;
+}
+
+@media (max-width: 768px) {
+  header {
+    height: 10vh;
+  }
 }
 
 @media only screen and (max-width: 800px) {
