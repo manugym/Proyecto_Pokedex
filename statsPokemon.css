@@ -41,7 +41,7 @@ img {
   display: flex;
   flex-direction: row;
   justify-content: center;
-
+  flex-wrap: wrap;
 }
 
 #contenedor-datos {
@@ -125,4 +125,29 @@ p {
 .in {
   height: 100%;
   background-color: rgb(255, 0, 0);
+}
+
+.cadena-evolutiva {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 40dvw;
+  height: 40dvh;
+  margin-top: 5dvh;
+  margin-bottom: 5dvh;
+}
+
+.contenedor-evoluciones {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  gap: 5dvw;
+  justify-content: center;
+}
+
+.contenedor-evoluciones img {
+  height: 60%;
+  width: 100%;
 }

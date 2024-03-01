@@ -7,9 +7,10 @@ async function obtenerPokemons() {
 
   if (id) {
     const pokemon = await getData(`https://pokeapi.co/api/v2/pokemon/${id}`);
-
     const species = await getData(pokemon.species.url);
     const puntosBase = await getData(`https://pokeapi.co/api/v2/pokemon-species/${id}`);
+    const evolutionChain = await getData(species.evolution_chain.url);
+
 
     // Filtrar para obtener la descripción en español
     let textoEspañol = species.flavor_text_entries.filter(entry => entry.language.name === 'es');
@@ -18,11 +19,11 @@ async function obtenerPokemons() {
     let description;
     if (textoEspañol.length > 0) {
       description = textoEspañol[0].flavor_text;
-    } else { 
+    } else {
       description = 'No se encontró descripción en español para este Pokémon.';
-    } 
+    }
 
-    draw(pokemon, species, description, puntosBase);
+    draw(pokemon, species, description, puntosBase, evolutionChain);
   } else {
     console.error('No se encontró el parámetro "id" en la URL');
   }
@@ -31,7 +32,7 @@ async function obtenerPokemons() {
 obtenerPokemons();
 
 
-async function draw(pokemon, species, description, puntosBase) {
+async function draw(pokemon, species, description, puntosBase, evolutionChain, obtenerImagenPokemon) {
 
   // Crear una nueva carta de Pokémon
   let nuevaCarta = document.createElement('div');
@@ -42,8 +43,6 @@ async function draw(pokemon, species, description, puntosBase) {
       </div>`;
 
   detallesPokemon.appendChild(nuevaCarta);
-
-  
 
   let descripcionPokemon = document.createElement('div');
   descripcionPokemon.className = 'descripcion-pokemon';
@@ -108,14 +107,73 @@ async function draw(pokemon, species, description, puntosBase) {
           </div>
           
         </div>
-      
-    
-        
           
         `;
 
   detallesPokemon.appendChild(puntosBaseContainer);
 
+
+  let cadenaEvolutiva = document.createElement('div');
+  cadenaEvolutiva.className = 'cadena-evolutiva';
+  cadenaEvolutiva.innerHTML = `
+    <h1>Cadena Evolutiva</h1>
+  `;
+
+  let contenedorEvoluciones = document.createElement('div');
+  contenedorEvoluciones.className = 'contenedor-evoluciones';
+
+  const evoluciones = await obtenerCadenaEvolutiva(evolutionChain.chain);
+  for (const evolucion of evoluciones) {
+    contenedorEvoluciones.innerHTML += `
+      <div>
+        <p>${evolucion.nombre}</p>
+        <p>${evolucion.nivel}</p>
+        <a href="${evolucion.urlDetalles}"><img src="${evolucion.url}"></a>
+      </div>
+    `;
+  }
+
+  cadenaEvolutiva.appendChild(contenedorEvoluciones);
+  detallesPokemon.appendChild(cadenaEvolutiva);
+
+}
+
+async function obtenerCadenaEvolutiva(chain) {
+  let evoluciones = [];
+  let estadoActual = chain;
+
+  while (estadoActual && estadoActual.species) {
+    const nombrePokemon = estadoActual.species.name;
+    const urlSpecies = estadoActual.species.url;
+    const urlPokemon = urlSpecies.replace('pokemon-species', 'pokemon');
+    const idPokemon = urlSpecies.split('/')[urlSpecies.split('/').length - 2];
+
+    // Obtener los datos del Pokémon para obtener la URL de la imagen
+    const pokemonData = await getData(urlPokemon);
+    const imageUrl = pokemonData.sprites.other['official-artwork'].front_default;
+
+    // Iterar sobre las evoluciones
+    for (const evolucion of estadoActual.evolves_to) {
+      let nivelEvolucion = null;
+      if (evolucion.evolution_details.length > 0) {
+        nivelEvolucion = evolucion.evolution_details[0].min_level;
+      }
+      evoluciones.push({ nombre: nombrePokemon, nivel: nivelEvolucion, url: imageUrl, urlDetalles: `statsPokemon.html?id=${idPokemon}`});
+    }
+
+    // Si el Pokémon no tiene evoluciones, también lo agregamos a la lista
+    if (estadoActual.evolves_to.length === 0) {
+      evoluciones.push({ nombre: nombrePokemon, nivel: null, url: imageUrl, urlDetalles: `statsPokemon.html?id=${idPokemon}` });
+    }
+
+    if (estadoActual.evolves_to.length > 0) {
+      estadoActual = estadoActual.evolves_to[0];
+    } else {
+      estadoActual = null;
+    }
+  }
+
+  return evoluciones;
 }
 
 // let tipos = '';
@@ -124,14 +182,6 @@ async function draw(pokemon, species, description, puntosBase) {
 //   } else {
 //     tipos += pokemon.types[0].type.name;
 //   }
-
-
-
-
-
-
-
-
 
 async function getData(url) {
   const response = await fetch(url);
