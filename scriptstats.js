@@ -1,5 +1,47 @@
 const detallesPokemon = document.getElementById('contenedor-pokemon');
 
+const diccionario = {
+  bug: "bicho",
+  steel: "acero",
+  water: "agua",
+  dragon: "dragón",
+  electric: "eléctrico",
+  ghost: "fantasma",
+  fire: "fuego",
+  fairy: "hada",
+  ice: "hielo",
+  fighting: "lucha",
+  normal: "normal",
+  grass: "planta",
+  psychic: "psíquico",
+  rock: "roca",
+  dark: "siniestro",
+  ground: "tierra",
+  poison: "veneno",
+  flying: "volador"
+}
+
+const coloresTipos = {
+  bug: "#92A21E",
+  steel: "#60A3BA",
+  water: "#2481F0",
+  dragon: "#4E60E2",
+  electric: "#F9C02B",
+  ghost: "#703F71",
+  fire: "#E72324",
+  fairy: "#EF70EF",
+  ice: "#3DD9FD",
+  fighting: "#FF8121",
+  normal: "#A1A2A0",
+  grass: "#3DA224",
+  psychic: "#EF3F79",
+  rock: "#B0AA82",
+  dark: "#4F3F3C",
+  ground: "#92501B",
+  poison: "#8E41CB",
+  flying: "#82BAF0"
+}
+
 async function obtenerPokemons() {
   const parametroUrl = new URLSearchParams(window.location.search);
   const id = parametroUrl.get('id');
@@ -34,6 +76,27 @@ obtenerPokemons();
 
 async function draw(pokemon, species, description, puntosBase, evolutionChain, obtenerImagenPokemon) {
 
+  let tipos = [];
+  let tipo;
+  let tipoColor = coloresTipos[pokemon.types[0].type.name];
+  let tipoColor2;
+
+  if (pokemon.types.length == 2) {
+    tipoColor2 = coloresTipos[pokemon.types[1].type.name];
+    tipo = pokemon.types[0].type.name;
+    let traduccion = diccionario[tipo]
+    tipos.push(traduccion);
+
+    tipo = pokemon.types[1].type.name;
+    traduccion = diccionario[tipo]
+    tipos.push(traduccion);
+
+  } else {
+    tipo = pokemon.types[0].type.name;
+    const traduccion = diccionario[tipo];
+    tipos.push(traduccion);
+  }
+
   // Crear una nueva carta de Pokémon
   let nuevaCarta = document.createElement('div');
   nuevaCarta.className = 'carta-pokemon';
@@ -48,8 +111,20 @@ async function draw(pokemon, species, description, puntosBase, evolutionChain, o
   descripcionPokemon.className = 'descripcion-pokemon';
   descripcionPokemon.innerHTML = `
       <h1 class="nombre-pokemon">${pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</h1>
-      <h3 class="numero-pokemon">Nº: ${pokemon.id.toString().padStart(3, 0)}</h3>
-      <p class="parrafo-pokemon">${description}</p>
+      <h3 class="numero-pokemon">Nº: ${pokemon.id.toString().padStart(3, 0)}</h3>`;
+
+  descripcionPokemon.innerHTML += `<div class="contenedor-tipos">
+    <div class="pokemon-tipos1" style="border-color: ${tipoColor}; color: ${tipoColor}">${tipos[0]}</div>`;
+
+  if (pokemon.types.length == 2) {
+    descripcionPokemon.innerHTML +=
+      `<div class="pokemon-tipos2" style = "border-color: ${tipoColor2}; color: ${tipoColor2}" > ${tipos[1]}</div > `;
+  }
+
+  descripcionPokemon.innerHTML += "</div>"
+
+  descripcionPokemon.innerHTML += `
+    <p class="parrafo-pokemon" > ${ description }</p>
       <div class="contenedor-datos">
         <p><b>Altura</b>: ${pokemon.height}</p>
         <p><b>Peso</b>: ${pokemon.weight}</p>
@@ -61,54 +136,54 @@ async function draw(pokemon, species, description, puntosBase, evolutionChain, o
   let puntosBaseContainer = document.createElement('div');
   puntosBaseContainer.className = 'puntos-base';
   puntosBaseContainer.innerHTML = `
-        <h3>Puntos Base</h3>
-        <div class="puntos-base-stats">
+        <h3> Puntos Base</h3>
+          <div class="puntos-base-stats">
 
-          <div class="stats-name">Vida: </div>
-          <div class="out" style = "width:${valorMaximo}px">
-            <div class="in" style = "width:${pokemon.stats[0].base_stat / valorMaximo * 100}%">
-              <div class="puntos-vida">${pokemon.stats[0].base_stat}</div>
+            <div class="stats-name">Vida: </div>
+            <div class="out" style="width:${valorMaximo}px">
+              <div class="in" style="width:${pokemon.stats[0].base_stat / valorMaximo * 100}%">
+                <div class="puntos-vida">${pokemon.stats[0].base_stat}</div>
+              </div>
             </div>
-          </div>
-  
-          <div class="stats-name">Ataque: </div>
-            <div class="out" style = "width:${valorMaximo}px">
-              <div class="in" style = "width:${pokemon.stats[1].base_stat / valorMaximo * 100}%">
+
+            <div class="stats-name">Ataque: </div>
+            <div class="out" style="width:${valorMaximo}px">
+              <div class="in" style="width:${pokemon.stats[1].base_stat / valorMaximo * 100}%">
                 <div class="puntos-ataque">${pokemon.stats[1].base_stat}</div>
               </div>
-          </div>
+            </div>
 
-          <div class="stats-name">Defensa: </div>
-            <div class="out" style = "width:${valorMaximo}px">
-              <div class="in" style = "width:${pokemon.stats[2].base_stat / valorMaximo * 100}%">
+            <div class="stats-name">Defensa: </div>
+            <div class="out" style="width:${valorMaximo}px">
+              <div class="in" style="width:${pokemon.stats[2].base_stat / valorMaximo * 100}%">
                 <div class="puntos-defensa">${pokemon.stats[2].base_stat}</div>
               </div>
-          </div>
+            </div>
 
-          <div class="stats-name">Ataque Especial: </div>
-            <div class="out" style = "width:${valorMaximo}px">
-              <div class="in" style = "width:${pokemon.stats[3].base_stat / valorMaximo * 100}%">
+            <div class="stats-name">Ataque Especial: </div>
+            <div class="out" style="width:${valorMaximo}px">
+              <div class="in" style="width:${pokemon.stats[3].base_stat / valorMaximo * 100}%">
                 <div class="puntos-ataque-">${pokemon.stats[3].base_stat}</div>
               </div>
-          </div>
+            </div>
 
-          <div class="stats-name">Defensa Especial: </div>
-            <div class="out" style = "width:${valorMaximo}px">
-              <div class="in" style = "width:${pokemon.stats[4].base_stat / valorMaximo * 100}%">
+            <div class="stats-name">Defensa Especial: </div>
+            <div class="out" style="width:${valorMaximo}px">
+              <div class="in" style="width:${pokemon.stats[4].base_stat / valorMaximo * 100}%">
                 <div class="puntos-vida">${pokemon.stats[4].base_stat}</div>
               </div>
-          </div>
+            </div>
 
-          <div class="stats-name">Velocidad: </div>
-            <div class="out" style = "width:${valorMaximo}px">
-              <div class="in" style = "width:${pokemon.stats[5].base_stat / valorMaximo * 100}%">
+            <div class="stats-name">Velocidad: </div>
+            <div class="out" style="width:${valorMaximo}px">
+              <div class="in" style="width:${pokemon.stats[5].base_stat / valorMaximo * 100}%">
                 <div class="puntos-vida">${pokemon.stats[5].base_stat}</div>
               </div>
+            </div>
+
           </div>
-          
-        </div>
-          
-        `;
+
+  `;
 
   detallesPokemon.appendChild(puntosBaseContainer);
 
@@ -116,8 +191,8 @@ async function draw(pokemon, species, description, puntosBase, evolutionChain, o
   let cadenaEvolutiva = document.createElement('div');
   cadenaEvolutiva.className = 'cadena-evolutiva';
   cadenaEvolutiva.innerHTML = `
-    <h1>Cadena Evolutiva</h1>
-  `;
+    <h1> Cadena Evolutiva</h1>
+      `;
 
   let contenedorEvoluciones = document.createElement('div');
   contenedorEvoluciones.className = 'contenedor-evoluciones';
@@ -158,12 +233,12 @@ async function obtenerCadenaEvolutiva(chain) {
       if (evolucion.evolution_details.length > 0) {
         nivelEvolucion = evolucion.evolution_details[0].min_level;
       }
-      evoluciones.push({ nombre: nombrePokemon, nivel: nivelEvolucion, url: imageUrl, urlDetalles: `statsPokemon.html?id=${idPokemon}`});
+      evoluciones.push({ nombre: nombrePokemon, nivel: nivelEvolucion, url: imageUrl, urlDetalles: `statsPokemon.html ? id = ${ idPokemon } ` });
     }
 
     // Si el Pokémon no tiene evoluciones, también lo agregamos a la lista
     if (estadoActual.evolves_to.length === 0) {
-      evoluciones.push({ nombre: nombrePokemon, nivel: null, url: imageUrl, urlDetalles: `statsPokemon.html?id=${idPokemon}` });
+      evoluciones.push({ nombre: nombrePokemon, nivel: null, url: imageUrl, urlDetalles: `statsPokemon.html ? id = ${ idPokemon } ` });
     }
 
     if (estadoActual.evolves_to.length > 0) {
