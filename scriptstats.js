@@ -134,16 +134,6 @@ async function draw(pokemon, species, description, puntosBase, evolutionChain, o
       <h1 class="nombre-pokemon">${pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</h1>
       <h3 class="numero-pokemon">Nº: ${pokemon.id.toString().padStart(3, 0)}</h3>`;
 
-  // descripcionPokemon.innerHTML += `<div class="contenedor-tipos">
-  //   <div class="pokemon-tipos1" style="border-color: ${tipoColor}; color: ${tipoColor}">${tipos[0]}</div>`;
-
-  // if (pokemon.types.length == 2) {
-  //   descripcionPokemon.innerHTML +=
-  //     `<div class="pokemon-tipos2" style = "border-color: ${tipoColor2}; color: ${tipoColor2}" > ${tipos[1]}</div > `;
-  // }
-
-  // descripcionPokemon.innerHTML += "</div>"
-
   let html = `<div class="contenedor-tipos">
     <div class="pokemon-tipos1" style="border-color: ${tipoColor}; color: ${tipoColor}">${tipos[0]}</div>`;
 
