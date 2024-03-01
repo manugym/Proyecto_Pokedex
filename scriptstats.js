@@ -147,8 +147,8 @@ async function draw(pokemon, species, description, puntosBase, evolutionChain, o
   descripcionPokemon.innerHTML += `
     <p class="parrafo-pokemon" > ${description}</p>
       <div class="contenedor-datos">
-        <p><b>Altura</b>: ${pokemon.height}</p>
-        <p><b>Peso</b>: ${pokemon.weight}</p>
+        <p><b>Altura</b>: ${pokemon.height/10} m</p>
+        <p><b>Peso</b>: ${pokemon.weight/10} kg</p>
       </div>`;
 
   detallesPokemon.appendChild(descripcionPokemon);
@@ -222,7 +222,7 @@ async function draw(pokemon, species, description, puntosBase, evolutionChain, o
   for (const evolucion of evoluciones) {
     contenedorEvoluciones.innerHTML += `
       <div>
-        <p>${evolucion.nombre}</p>
+        <p class="nombre-cadena-evolutiva">${evolucion.nombre}</p>
         <p>${evolucion.nivel}</p>
         <a href="${evolucion.urlDetalles}"><img src="${evolucion.url}"></a>
       </div>

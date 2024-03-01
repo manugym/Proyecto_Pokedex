@@ -36,16 +36,26 @@ header {
   height: 20dvh;
 }
 
+.boton-modonocturno {
+  margin-left: 1%;
+  align-self: center;
+}
+
+#modo-nocturno {
+  background-color: rgb(180, 180, 180);
+}
+
 #modo-nocturno img {
   height: 30px;
   width: auto;
 }
 
 #cuadro-texto {
+  align-self: center;
   padding: 2dvh 0 2dvh 0;
   width: 20dvw;
-  height: 1dvh;
-  margin-right: 38%;
+  height: 0.03dvh;
+  margin-right: 39%;
 }
 
 .barra-superior {
