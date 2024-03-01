@@ -223,6 +223,11 @@ p {
   text-align: center;
 }
 
+.cadena-evolutiva p {
+  font-size: 1em;
+
+}
+
 .contenedor-evoluciones {
   display: flex;
   flex-direction: row;
