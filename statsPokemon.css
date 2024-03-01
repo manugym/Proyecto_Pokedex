@@ -173,6 +173,7 @@ h3,
 p {
   text-align: center;
   color: black;
+  font-size: 1.3em;
 }
 
 .puntos-base {
@@ -238,4 +239,6 @@ p {
 
 .nombre-cadena-evolutiva {
   text-transform: capitalize;
+  font-size: 1.2em;
+  font-weight: bold;
 }

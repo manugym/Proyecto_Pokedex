@@ -224,7 +224,7 @@ async function draw(pokemon, species, description, puntosBase, evolutionChain, o
     contenedorEvoluciones.innerHTML += `
       <div>
         <p class="nombre-cadena-evolutiva">${evolucion.nombre}</p>
-        <p>${evolucion.nivel}</p>
+        <p><b>Nivel</b>: ${evolucion.nivel}</p>
         <a href="${evolucion.urlDetalles}"><img src="${evolucion.url}"></a>
       </div>
     `;
@@ -234,8 +234,6 @@ async function draw(pokemon, species, description, puntosBase, evolutionChain, o
   detallesPokemon.appendChild(cadenaEvolutiva);
 
 }
-
-let idPokemonActual = new URLSearchParams(window.location.search).get('id');
 
 async function obtenerCadenaEvolutiva(chain) {
   let evoluciones = [];
