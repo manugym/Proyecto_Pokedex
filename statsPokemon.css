@@ -79,7 +79,7 @@ img {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
-  gap: 0,5dvw;
+  gap: 0, 5dvw;
   padding: 1%;
   max-width: 100dvw;
   justify-items: center;
@@ -102,17 +102,10 @@ img {
 
 @media only screen and (max-width: 800px) {
   #contenedor-pokemon {
-    width: 90vw; 
+    width: 90vw;
     grid-template-columns: 1fr;
   }
 
-  .puntos-base-stats{
-    width: 100%;
-  }
-  .stats-name {
-    width: 10%;
-  }
-  
   .contenedor-evoluciones {
     display: flex;
     flex-direction: column;
@@ -168,10 +161,11 @@ img {
   gap: 1dvw;
 }
 
-.pokemon-tipos2, .pokemon-tipos1 {
+.pokemon-tipos2,
+.pokemon-tipos1 {
   text-transform: capitalize;
   font-size: 1.2em;
-  border: 3px solid; 
+  border: 3px solid;
 }
 
 .descripcion-pokemon h1,
@@ -188,6 +182,7 @@ p {
   border-radius: 20px;
   background-color: rgba(214, 214, 214, 0.803);
   font-size: 1em;
+  overflow: auto;
 }
 
 .puntos-base-stats {
