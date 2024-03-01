@@ -7,25 +7,46 @@ body {
   height: 100dvh;
 }
 
+.dark-mode {
+  background-color: #333;
+  color: #fff;
+  background-image: none;
+}
+
+.dark-mode #contenedor-pokemon div {
+  background-color: #444;
+  color: #fff;
+}
+
+.dark-mode .carta-pokemon {
+  padding: 0;
+}
+
+
 header {
   background-color: rgb(58, 58, 58);
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 100dvw;
   height: 20dvh;
 }
 
-.cuadro-texto {
+#modo-nocturno img{
+  height: 30px;
+  width: auto;
+}
+
+#cuadro-texto {
   padding: 2dvh 0 2dvh 0;
-  align-self: center;
-  width: 30dvw;
+  width: 20dvw;
   height: 1dvh;
+  margin-right: 38%;
 }
 
 .barra-superior {
   padding: 2dvh 0 2dvh 0;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   background-color: rgb(227, 148, 0);
   width: 100%;
   height: 8vh;
@@ -42,22 +63,48 @@ header {
 * @author: Javier Rico Navarro
 */
 
+
 #contenedor-pokemon {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  padding-left: 5%;
-  margin-top: 2%;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-rows: 1fr;
+  gap: 1dvw;
+  padding: 1%;
+  max-width: 100dvw;
+  justify-items: center;
 }
+
 
 .carta-pokemon {
   /* background-image: url(/imagenes/fondo-carta.jpg); */
   background-color: white;
   border: 5px solid rgb(0, 0, 0);
-  width: 20dvw;
-  height: 40dvh;
+  width: 28dvw;
+  height: auto;
   margin-top: 20%;
   text-decoration: none;
   color: black;
+  padding: 2%;
+}
+
+@media only screen and (min-width: 1280px) {
+
+  #contenedor-pokemon {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 1dvw;
+    padding: 1%;
+    max-width: 100dvw;
+    justify-items: center;
+  }
+
+
+  .carta-pokemon {
+    width: 30vw;
+    height: auto; 
+    margin-top: 15%;
+  }
 }
 
 .pokemon-imagen {

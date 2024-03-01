@@ -2,6 +2,14 @@ const listaPokemon = document.getElementById('contenedor-pokemon');
 const pokemonTodos = [];
 const pokemonFiltrados = [];
 
+const modoNocturnoBoton = document.getElementById('modo-nocturno');
+const cuerpo = document.body;
+
+// acción botón de modo nocturno
+modoNocturnoBoton.addEventListener('click', () => {
+  cuerpo.classList.toggle('dark-mode');
+});
+
 const diccionario = {
   bug: "bicho",
   steel: "acero",
@@ -135,8 +143,6 @@ async function getData(url) {
   const json = await response.text();
   return JSON.parse(json);
 }
-
-
 
 
 
