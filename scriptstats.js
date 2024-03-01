@@ -234,6 +234,8 @@ async function draw(pokemon, species, description, puntosBase, evolutionChain, o
 
 }
 
+let idPokemonActual = new URLSearchParams(window.location.search).get('id');
+
 async function obtenerCadenaEvolutiva(chain) {
   let evoluciones = [];
   let estadoActual = chain;
@@ -244,22 +246,20 @@ async function obtenerCadenaEvolutiva(chain) {
     const urlPokemon = urlSpecies.replace('pokemon-species', 'pokemon');
     const idPokemon = urlSpecies.split('/')[urlSpecies.split('/').length - 2];
 
-    // Obtener los datos del Pokémon para obtener la URL de la imagen
     const pokemonData = await getData(urlPokemon);
     const imageUrl = pokemonData.sprites.other['official-artwork'].front_default;
 
-    // Iterar sobre las evoluciones
     for (const evolucion of estadoActual.evolves_to) {
       let nivelEvolucion = null;
       if (evolucion.evolution_details.length > 0) {
         nivelEvolucion = evolucion.evolution_details[0].min_level;
       }
-      evoluciones.push({ nombre: nombrePokemon, nivel: nivelEvolucion, url: imageUrl, urlDetalles: `statsPokemon.html ? id = ${idPokemon} ` });
+      evoluciones.push({ nombre: nombrePokemon, nivel: nivelEvolucion, url: imageUrl, urlDetalles: `statsPokemon.html?id=${idPokemon}`});
     }
 
     // Si el Pokémon no tiene evoluciones, también lo agregamos a la lista
     if (estadoActual.evolves_to.length === 0) {
-      evoluciones.push({ nombre: nombrePokemon, nivel: null, url: imageUrl, urlDetalles: `statsPokemon.html ? id = ${idPokemon} ` });
+      evoluciones.push({ nombre: nombrePokemon, nivel: null, url: imageUrl, urlDetalles: `statsPokemon.html?id=${idPokemon}`});
     }
 
     if (estadoActual.evolves_to.length > 0) {
