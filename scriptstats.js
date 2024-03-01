@@ -134,21 +134,32 @@ async function draw(pokemon, species, description, puntosBase, evolutionChain, o
       <h1 class="nombre-pokemon">${pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</h1>
       <h3 class="numero-pokemon">Nº: ${pokemon.id.toString().padStart(3, 0)}</h3>`;
 
-  descripcionPokemon.innerHTML += `<div class="contenedor-tipos">
+  // descripcionPokemon.innerHTML += `<div class="contenedor-tipos">
+  //   <div class="pokemon-tipos1" style="border-color: ${tipoColor}; color: ${tipoColor}">${tipos[0]}</div>`;
+
+  // if (pokemon.types.length == 2) {
+  //   descripcionPokemon.innerHTML +=
+  //     `<div class="pokemon-tipos2" style = "border-color: ${tipoColor2}; color: ${tipoColor2}" > ${tipos[1]}</div > `;
+  // }
+
+  // descripcionPokemon.innerHTML += "</div>"
+
+  let html = `<div class="contenedor-tipos">
     <div class="pokemon-tipos1" style="border-color: ${tipoColor}; color: ${tipoColor}">${tipos[0]}</div>`;
 
   if (pokemon.types.length == 2) {
-    descripcionPokemon.innerHTML +=
-      `<div class="pokemon-tipos2" style = "border-color: ${tipoColor2}; color: ${tipoColor2}" > ${tipos[1]}</div > `;
+    html += `<div class="pokemon-tipos2" style="border-color: ${tipoColor2}; color: ${tipoColor2}">${tipos[1]}</div>`;
   }
 
-  descripcionPokemon.innerHTML += "</div>"
+  html += "</div>";
+
+  descripcionPokemon.innerHTML += html;
 
   descripcionPokemon.innerHTML += `
     <p class="parrafo-pokemon" > ${description}</p>
       <div class="contenedor-datos">
-        <p><b>Altura</b>: ${pokemon.height/10} m</p>
-        <p><b>Peso</b>: ${pokemon.weight/10} kg</p>
+        <p><b>Altura</b>: ${pokemon.height / 10} m</p>
+        <p><b>Peso</b>: ${pokemon.weight / 10} kg</p>
       </div>`;
 
   detallesPokemon.appendChild(descripcionPokemon);
@@ -254,12 +265,12 @@ async function obtenerCadenaEvolutiva(chain) {
       if (evolucion.evolution_details.length > 0) {
         nivelEvolucion = evolucion.evolution_details[0].min_level;
       }
-      evoluciones.push({ nombre: nombrePokemon, nivel: nivelEvolucion, url: imageUrl, urlDetalles: `statsPokemon.html?id=${idPokemon}`});
+      evoluciones.push({ nombre: nombrePokemon, nivel: nivelEvolucion, url: imageUrl, urlDetalles: `statsPokemon.html?id=${idPokemon}` });
     }
 
     // Si el Pokémon no tiene evoluciones, también lo agregamos a la lista
     if (estadoActual.evolves_to.length === 0) {
-      evoluciones.push({ nombre: nombrePokemon, nivel: null, url: imageUrl, urlDetalles: `statsPokemon.html?id=${idPokemon}`});
+      evoluciones.push({ nombre: nombrePokemon, nivel: null, url: imageUrl, urlDetalles: `statsPokemon.html?id=${idPokemon}` });
     }
 
     if (estadoActual.evolves_to.length > 0) {

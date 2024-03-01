@@ -126,16 +126,16 @@ img {
 
 .contenedor-tipos {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  justify-content: center;
+  gap: 1dvw;
 }
 
-.pokemon-tipos2 {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-items: center;
-
+.pokemon-tipos2, .pokemon-tipos1 {
+  text-transform: capitalize;
+  font-size: 1.2em;
+  border: 3px solid; 
 }
 
 .descripcion-pokemon h1,
